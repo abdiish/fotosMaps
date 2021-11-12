@@ -22,7 +22,9 @@
 
   <!--Infinite Scroll-->
   <ion-infinite-scroll [disabled]="!habilitado" threshold="150px" (ionInfinite)="siguientes($event)">
-    <ion-infinite-scroll-content>
+    <ion-infinite-scroll-content
+      loadingSpinner="crescent"
+      loadingText="Cargando...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
