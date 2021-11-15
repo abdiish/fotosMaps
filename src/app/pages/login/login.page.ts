@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { IonSlides, NavController } from '@ionic/angular';
 import { UsuarioService } from '../../services/usuario.service';
 import { UiServicesService } from '../../services/ui-services.service';
+import { Usuario } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -57,6 +58,15 @@ export class LoginPage implements OnInit {
     password: '123456'
   };
 
+  registerUser: Usuario = {
+
+    email: 'test@gmail.com',
+    password: '123456',
+    nombre: 'Test',
+    avatar: 'av-1.png'
+
+  };
+
   constructor(private usuarioService: UsuarioService,
               private navCtrl: NavController,
               private uiService: UiServicesService ) { }
@@ -85,8 +95,22 @@ export class LoginPage implements OnInit {
     }
   }
 
-  registro(fRegistro: NgForm) {
-    console.log(fRegistro.valid)
+  async registro(fRegistro: NgForm) {
+
+    if (fRegistro.invalid) {
+      return;
+    }
+
+    const valido = await this.usuarioService.registro(this.registerUser);
+
+    if (valido) {
+      // Navegar a tabs
+      this.navCtrl.navigateRoot('/main/tabs/tab1', {animated: true});
+    }else {
+      // Mostrar alerta de usuario y contraseña no correctos
+      this.uiService.alertaInformativa('El correo electrónico ya existe');
+    }
+
   }
 
   seleccionarAvatar(avatar) {

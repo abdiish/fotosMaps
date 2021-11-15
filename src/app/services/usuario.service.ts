@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Storage } from '@ionic/storage-angular';
+import { Usuario } from '../interfaces/interfaces';
 
 const URL = environment.url;
 
@@ -38,6 +39,29 @@ export class UsuarioService {
 
     });
 
+
+  }
+
+  registro(usuario: Usuario) {
+
+    return new Promise(resolve => {
+
+      this.http.post(`${ URL }/user/create`, usuario).subscribe(resp => {
+        console.log(resp);
+
+        if (resp['ok']) {
+          this.guardarToken(resp['token']);
+          resolve(true);
+        }else{
+          this.token = null;
+          this.storage.clear();
+          resolve(false);
+        }
+
+
+      });
+
+    });
 
   }
 
