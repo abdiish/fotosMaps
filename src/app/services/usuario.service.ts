@@ -68,6 +68,15 @@ export class UsuarioService {
 
   }
 
+  getUsuario() {
+
+    if (!this.usuario._id) {
+      this.validaToken();
+    }
+
+    return { ...this.usuario };
+  }
+
   async guardarToken(token: string) {
 
     this.token = token;
