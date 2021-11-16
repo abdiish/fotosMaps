@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Geolocation],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Geolocation, Camera],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
