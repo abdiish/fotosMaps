@@ -22,7 +22,7 @@ export class Tab3Page implements OnInit{
 
   }
 
-  async actualizar(fActualizar: NgForm) {
+  async actualizar(fActualizar: HTMLFormElement) {
 
     if (fActualizar.invalid) {
       return;
